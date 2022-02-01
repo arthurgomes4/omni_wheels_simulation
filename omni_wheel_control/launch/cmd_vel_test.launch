@@ -1,0 +1,10 @@
+<launch>
+    <node name="lol" pkg="omni_wheel_control" type="cmd_vel_node.py" output="screen">
+        <param name="cmd_vel_topic" value="/cmd_vel"/>
+        <param name="number_of_wheels" value="4"/>
+        <param name="wheel_radii" value="0.76 0.76 0.76 0.76"/>
+        <param name="wheel_driving_angles" value="-0.785 0.785 2.356 3.926"/>
+        <param name="wheel_x_coords" value="0.5 -0.5 -0.5 0.5"/>
+        <param name="wheel_y_coords" value="0.5 0.5 -0.5 -0.5"/>
+    </node>
+</launch>
