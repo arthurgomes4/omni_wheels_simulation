@@ -85,7 +85,6 @@ class cmdVelocityNode:
             # publish the wheel speed
             wheel_speeds.append(speed)
 
-        print(wheel_speeds)
         for i in range(self.number_of_wheels):
             self.vel_command_pubs[i].publish(wheel_speeds[i])
 
