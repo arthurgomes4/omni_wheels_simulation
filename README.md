@@ -20,8 +20,17 @@ Omni wheels or poly wheels are wheels with freely rotating rollers around the ci
 - [omni_wheel_control](./omni_wheel_control): Contains odometry and velocity control node scripts. These nodes when run provide topics for robot control and odometry position feedback .
 - [test_base](./test_base): an example 4-wheel base using 150mm omni-wheels.
 
+## Download and usage guide
+Clone the entire repository into your local workspace with:
+```
+git clone https://github.com/arthurgomes4/omni_wheels_simulation.git
+```
+Proceed to build and source the workspace packages.
 
-
+Launch gazebo with the [test_base](./test_base) model spawned along with odometry and command velocity nodes.
+```
+roslaunch test_base gazebo.launch
+```
 
 [![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
