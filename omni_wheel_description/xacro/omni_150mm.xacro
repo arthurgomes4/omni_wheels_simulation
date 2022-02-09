@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find omni_wheel_description)/xacro/hardware_interface.xacro"/> 
+
+<!-- mass of wheel: 0.8kg -->
+<!-- diameter: 0.152m -->
+<!-- width: 0.039m -->
+
+<!-- parameters:
+     - name : the name of the wheel link
+     
+     - parent_link : the link the wheel link is connected to
+
+     - xyz : x,y,z coords of the location of the centre of the wheel wrt to the parent_link frame (m)
+
+     - driving_angle : The angle made by the driving direction of the wheel (wheel link x axis) 
+                       with respect to the parent_link frame x axis (rad)
+
+     - effort_limit : max torque for each wheel motor (Nm)
+
+     - speed_limit : max speed for each wheel motor (rad/s)
+
+     - reduction : mechanical gear ratio. A value of 50 implies 50:1-->
+
+<xacro:macro name="omni_wheel_150mm" params="name parent_link xyz driving_angle effort_limit speed_limit reduction">
+        
+    <!-- mass: kg
+         radius: m
+         width: m -->
+
+    <!-- friction - The physical static friction. For prismatic joints, the units are Newtons. 
+            For revolving joints, the units are Newton meters.  -->
+
+    <!-- damping - The physical damping value. For prismatic joints, the units are Newton seconds per meter.
+            For revolving joints, Newton meter seconds per radian.  -->
+
+    <xacro:property name="mass" value="0.8"/>
+    <xacro:property name="radius" value="0.076"/>
+    <xacro:property name="width" value="0.039"/>
+    <xacro:property name="damping" value="1"/>
+    <xacro:property name="friction" value="1"/>
+
+    <!-- create the wheel link first -->
+    <link name="${name}">
+
+        <inertial>
+            <mass value="${mass}"/>
+            <inertia  ixx="0.00156741267852" ixy="0" ixz="0" iyy="0.00156534309855" iyz="0" izz="0.00294038677227" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://omni_wheel_description/meshes/omni_150mm.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${radius}" length="${width}"/>
+            </geometry>
+        </collision>
+
+    </link>
+
+    <gazebo reference="${name}">
+        <material>Gazebo/White</material>
+
+        <!-- friction coeff along the friction axis -->
+        <mu1>0.0001</mu1>
+
+        <!-- friciton coeff along the axes perpendicular to the friction axis -->
+        <mu2>1.0</mu2>
+
+        <!-- direction for friction axis -->
+        <fdir1>0 0 1</fdir1>
+    </gazebo>
+
+    <!-- create the joint between wheel link and parent link 
+         ==================================================================
+         NOTE: the joint created will be named "${name}_joint".
+               where "name" is the name given to the wheel link. 
+               KEEP THIS IN MIND when writing the controller yaml files
+         ================================================================== -->
+
+    <joint name="${name}_joint" type="continuous">
+
+        <parent link="${parent_link}"/>
+        <child link="${name}"/>
+        <origin xyz="${xyz}" rpy="-1.57 0 ${driving_angle}"/>
+        <axis xyz="0 0 1" rpy="0 0 0"/>
+        <limit effort="${effort_limit}" velocity="${speed_limit}"/>
+        <joint_properties damping="${damping}" friction="${friction}" />
+
+    </joint>
+
+    <xacro:joint_transmission joint_name="${name}_joint" reduction="${reduction}"/>
+
+</xacro:macro>
+
+</robot>

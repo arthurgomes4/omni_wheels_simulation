@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<!-- this file contains the transmission element macro used to initialize the wheel velocity interface -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- supplied parameters:
+     - joint_name : the name of the joint for which the transmission interface is for 
+     - reduction : mechanical gear ratio. A value of 50 implies 50:1-->
+     
+<xacro:macro name="joint_transmission" params="joint_name reduction">
+    <transmission name="${joint_name}_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>${reduction}</mechanicalReduction>
+      </actuator>
+    </transmission>
+</xacro:macro>
+
+</robot>
