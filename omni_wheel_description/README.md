@@ -1,1 +1,0 @@
-# Omni Wheel Description
