@@ -35,5 +35,10 @@ roslaunch test_base gazebo.launch
 ```
 sudo apt update && sudo apt install ros-melodic-velocity-controllers
 ```
+To control movement use:
+```
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+```
 [![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
