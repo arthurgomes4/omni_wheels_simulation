@@ -41,6 +41,7 @@
     <xacro:property name="width" value="0.039"/>
     <xacro:property name="damping" value="1"/>
     <xacro:property name="friction" value="1"/>
+    <xacro:property name="collision_mesh_scaler" value="0.05"/>
 
     <!-- create the wheel link first -->
     <link name="${name}">
@@ -56,7 +57,7 @@
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="${radius}" length="${width}"/>
+                <cylinder radius="${radius}" length="${width*collision_mesh_scaler}"/>
             </geometry>
         </collision>
 

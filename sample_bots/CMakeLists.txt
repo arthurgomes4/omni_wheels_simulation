@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(omni_wheel_control)
+project(sample_bots)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,11 +8,8 @@ project(omni_wheel_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  velocity-controllers
-  controller-manager
-  joint-state-controller
+  gazebo_plugins
+  gazebo_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -106,8 +103,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES omni_wheel_control
-#  CATKIN_DEPENDS roscpp rospy
+#  LIBRARIES sample_bots
+#  CATKIN_DEPENDS gazebo_plugins gazebo_ros
 #  DEPENDS system_lib
 )
 
@@ -124,7 +121,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/omni_wheel_control.cpp
+#   src/${PROJECT_NAME}/sample_bots.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -135,7 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/omni_wheel_control_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/sample_bots_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -199,7 +196,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_omni_wheel_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_sample_bots.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
