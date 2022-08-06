@@ -2,6 +2,7 @@
 
 <robot name="test_base" xmlns:xacro="https://www.ros.org/wiki/xacro">
 
+    <!-- create the main body here -->
     <link name="main">
         <inertial>
             <mass value="1"/>
@@ -16,10 +17,21 @@
 
     <xacro:include filename="$(find omni_wheel_description)/xacro/omni_150mm.xacro"/> 
 
-    <xacro:omni_wheel_150mm name="wheel1" parent_link="main" xyz=" 0.5  0.5 0" driving_angle="-0.785" effort_limit="10" speed_limit="40" reduction="1"/>
-    <xacro:omni_wheel_150mm name="wheel2" parent_link="main" xyz="-0.5  0.5 0" driving_angle=" 0.785" effort_limit="10" speed_limit="40" reduction="1"/>
-    <xacro:omni_wheel_150mm name="wheel3" parent_link="main" xyz="-0.5 -0.5 0" driving_angle=" 2.356" effort_limit="10" speed_limit="40" reduction="1"/>
-    <xacro:omni_wheel_150mm name="wheel4" parent_link="main" xyz=" 0.5 -0.5 0" driving_angle=" 3.926" effort_limit="10" speed_limit="40" reduction="1"/>
+    <xacro:omni_wheel_150mm name="wheel1" parent_link="main" 
+                            xyz=" 0.5  0.5 0" driving_angle="-0.785" 
+                            effort_limit="10" speed_limit="40" reduction="1"/>
+
+    <xacro:omni_wheel_150mm name="wheel2" parent_link="main" 
+                            xyz="-0.5  0.5 0" driving_angle=" 0.785" 
+                            effort_limit="10" speed_limit="40" reduction="1"/>
+
+    <xacro:omni_wheel_150mm name="wheel3" parent_link="main" 
+                            xyz="-0.5 -0.5 0" driving_angle=" 2.356" 
+                            effort_limit="10" speed_limit="40" reduction="1"/>
+
+    <xacro:omni_wheel_150mm name="wheel4" parent_link="main" 
+                            xyz=" 0.5 -0.5 0" driving_angle=" 3.926" 
+                            effort_limit="10" speed_limit="40" reduction="1"/>
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

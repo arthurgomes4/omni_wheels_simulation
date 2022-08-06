@@ -1,5 +1,5 @@
-[![Image](https://img.shields.io/badge/ROS-Melodic-purple.svg)](https://github.com/arthurgomes4)
-[![Image](https://img.shields.io/badge/Gazebo-9.0.0-orange.svg)](https://github.com/arthurgomes4)
+[![Image](https://img.shields.io/badge/ROS-Noetic-purple.svg)](https://github.com/arthurgomes4)
+[![Image](https://img.shields.io/badge/Gazebo-11.9.0-orange.svg)](https://github.com/arthurgomes4)
 
 # Omni Wheels Simulation
 
@@ -39,6 +39,5 @@ To control movement use:
 ```
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
-```
 [![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)

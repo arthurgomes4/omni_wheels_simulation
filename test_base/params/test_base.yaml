@@ -1,5 +1,9 @@
-# Gazebo ros control
+# GAZEBO ROS CONTROL
+# ===============================
 
+# Note:
+# these aren't loaded by the controllers since we're using velocity controllers
+# but removing them will result in an error
 gazebo_ros_control:
   pid_gains:
     wheel1_joint:
@@ -12,6 +16,7 @@ gazebo_ros_control:
       {p: 1,i: 0, d: 0}
 
 # GAZEBO JOINT CONTROLLERS
+# ================================
 
 # publishes the state of all joints
 joint_state_controller:
@@ -22,24 +27,29 @@ joint_state_controller:
 wheel1_joint_velocity_controller:
   type: velocity_controllers/JointVelocityController
   joint: wheel1_joint
-  # pid: {p: 1, i: 0.5, d: 0.0035}
 
 wheel2_joint_velocity_controller:
   type: velocity_controllers/JointVelocityController
   joint: wheel2_joint
-  # pid: {p: 1, i: 0.5, d: 0.0035}
 
 wheel3_joint_velocity_controller:
   type: velocity_controllers/JointVelocityController
   joint: wheel3_joint
-  # pid: {p: 1, i: 0.5, d: 0.0035}
 
 wheel4_joint_velocity_controller:
   type: velocity_controllers/JointVelocityController
   joint: wheel4_joint
-  # pid: {p: 1, i: 0.5, d: 0.0035}
 
 # CMD_VEL_NODE and ODOM_NODE PARAMS
+# =================================
+
+# ---------Topics----------
+
+# NOTE:
+# putting a slash before 'cmd_vel' makes it a global topic.
+# if you just type 'cmd_vel_topic: cmd_vel' the actual topic 
+# name used by the cmd_vel_node will be '/ROBOT_NAMESPACE/cmd_vel' 
+# provided you launch the nodes in the same ROBOT_NAMESPACE.
 
 # the velocity command topic 
 cmd_vel_topic: /cmd_vel
@@ -47,6 +57,16 @@ cmd_vel_topic: /cmd_vel
 # the odometry topic
 odom_topic: /odom
 
+# the command topics for each wheel controller
+wheel_controller_command_topics: [wheel1_joint_velocity_controller/command,
+                                  wheel2_joint_velocity_controller/command,
+                                  wheel3_joint_velocity_controller/command,
+                                  wheel4_joint_velocity_controller/command]
+
+# the topic with each joint state aka encoder data
+wheel_state_topic: joint_states
+
+# ------------bot parameters---------------
 number_of_wheels: 4
 wheel_radius: 0.076
 
@@ -58,15 +78,11 @@ wheel_driving_angles: [-0.785, 0.785, 2.356, 3.926]
 wheel_x_coords: [0.5, -0.5, -0.5,  0.5]
 wheel_y_coords: [0.5,  0.5, -0.5, -0.5]
 
-wheel_controller_command_topics: [wheel1_joint_velocity_controller/command,
-                                  wheel2_joint_velocity_controller/command,
-                                  wheel3_joint_velocity_controller/command,
-                                  wheel4_joint_velocity_controller/command]
+# ----------initial starting position-------------
 
-wheel_state_topic: /test_base/joint_states
+# NOTE: 
+# changing the start configuration here will require you to change the 
+# robots spawn location and yaw in the spawn_model node args and vice-versa
 
-# timeout in seconds
-cmd_vel_node_timeout: 3
-
-# robot base initial configuration in space frame [ chassis_phi, chassis_x, chassis_y ]
-robot_start_config: [0,0,0]
+# robot base initial configuration in space frame [ chassis_orientation with space frame, chassis_x, chassis_y ]
+robot_start_config: [0,0,0] # [rad, m, m]
