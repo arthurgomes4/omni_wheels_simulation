@@ -31,10 +31,13 @@ Launch gazebo with the [test_base](./test_base) model spawned along with odometr
 ```
 roslaunch test_base gazebo.launch
 ```
-
 **NOTE**: You may have to install ros velocity controllers if they are not already present. Use command:
 ```
-sudo apt update && sudo apt install ros-noetic-velocity-controllers
+sudo apt update && sudo apt install ros-melodic-velocity-controllers
 ```
+To control movement use:
+```
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
 [![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
